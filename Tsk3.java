@@ -1,6 +1,8 @@
 package org.booking;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -69,35 +71,17 @@ public class Tsk3 extends Base {
 			    
 			Thread.sleep(3000);
 			
-			List<WebElement> elements = driver.findElements(By.xpath("//div//h5[contains(text(),'Hyatt')]"));
+			List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col-md-5 hotel-suites']//h5"));
+			List<String> hotelname = new ArrayList<>();			
 			for (WebElement webElement : elements) {
 			
-				String hyatthotels = webElement.getText();
-				System.out.println(hyatthotels);
-			}
-			
-			List<WebElement> elements2 = driver.findElements(By.xpath("//div//h5[contains(text(),'ITC')]"));
-			for (WebElement webElement : elements2) {
-				
-				String ITChotels = webElement.getText();
-				System.out.println(ITChotels);
-			}
-			
-			List<WebElement> elements3 = driver.findElements(By.xpath("//div//h5[contains(text(),'Radisson')]"));
-			for (WebElement webElement : elements3) {
-				
-				String Radissonhotles  = webElement.getText();
-				System.out.println(Radissonhotles);
-			}
-			
-			List<WebElement> elements4 = driver.findElements(By.xpath("//div//h5[contains(text(),'Taj')]"));
-			for (WebElement webElement : elements4) {
-				
-				String Tajhotles  = webElement.getText();
-				System.out.println(Tajhotles);
-			}
-			
-			
-		    	 
+				String hotels = webElement.getText();
+				hotelname.add(hotels);
 	}
+			System.out.println(hotelname);
+			List<String> hotelname1 = new ArrayList<>();
+			hotelname1.addAll(hotelname);
+			Collections.sort(hotelname1);
+			System.out.println(hotelname1);
+}
 }
