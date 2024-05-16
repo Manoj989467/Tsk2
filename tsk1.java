@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,13 +43,20 @@ public class tsk1 extends Base {
 			    WebElement city=driver.findElement(By.id("city"));
 			    elementDdnIndex(city, 1);
 				
-				WebElement roomtype= driver.findElement(By.xpath("//select[@name='room_type[]']"));
+			    WebElement roomtype = driver.findElement(By.id("room_type"));
+
 				Select room = new Select(roomtype);
-					room.selectByIndex(1);	
-					room.selectByIndex(2);
-					room.selectByIndex(3);
-					room.selectByIndex(4);
-					room.selectByIndex(5);
+
+				List<WebElement> options = room.getOptions();
+
+				for (WebElement webElement : options) {
+					String roomstype = webElement.getText();
+					if (roomstype.equals("Room Type")) {
+						continue;
+					} else {
+						room.selectByVisibleText(roomstype);
+					}
+				}
 				driver.findElement(By.xpath("//input[@name='check_in']")).click();
 				
 				driver.findElement(By.xpath("//a[@class='ui-state-default ui-state-highlight ui-state-hover']")).click();
@@ -170,6 +176,11 @@ public class tsk1 extends Base {
 			       
 			        String price1 = driver.findElement(By.xpath("(//strong[@class='total-prize'])[1]")).getText();
 			        System.out.println(price1);
+			        
+			        String substring = bookingid.substring(0, 11);
+			        System.out.println(substring);
+			        driver.findElement(By.xpath("//input[@name='search']")).sendKeys(substring,Keys.ENTER);
+			        Thread.sleep(6000);
 			      
 			        driver.findElement(By.xpath("//button[@class='edit btn filter_btn']")).click();
 			        Thread.sleep(3000);
@@ -181,7 +192,7 @@ public class tsk1 extends Base {
 			       String cncel = driver.findElement(By.xpath("//li[.='Booking updated successfully']")).getText();
                    System.out.println(cncel);
 			      
-                   //cancel booking
+//                   //cancel booking
                    
                    driver.findElement(By.xpath("//a[@data-testid='username']")).click();
 			  	   driver.findElement(By.xpath("//a[.='My Account']")).click();

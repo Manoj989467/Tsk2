@@ -67,8 +67,10 @@ public class Tsk3 extends Base {
 		    driver.switchTo().frame(frmeswitch);
 		 	    	
 		    WebElement search_button= driver.findElement(By.id("searchBtn"));
-			search_button.click();
-			    
+			search_button.click();		    
+			Thread.sleep(3000);
+			
+			driver.findElement(By.xpath("//label[.='Name Ascending']")).click();
 			Thread.sleep(3000);
 			
 			List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col-md-5 hotel-suites']//h5"));
@@ -81,7 +83,20 @@ public class Tsk3 extends Base {
 			System.out.println(hotelname);
 			List<String> hotelname1 = new ArrayList<>();
 			hotelname1.addAll(hotelname);
+			
 			Collections.sort(hotelname1);
 			System.out.println(hotelname1);
-}
+			boolean equals = hotelname1.equals(hotelname);
+			
+			if(equals)
+			{
+				System.out.println("order is correct");
+			}
+			else
+			{
+				System.out.println("order is wrong");
+			}
+			
+   }
+	
 }
